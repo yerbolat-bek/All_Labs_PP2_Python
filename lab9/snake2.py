@@ -5,12 +5,10 @@ import sys
 pygame.init()
 pygame.mixer.init()
 
-# Ойынның константалары
-WIDTH, HEIGHT = 600, 400
 CELL_SIZE = 10  # Бір клетканың өлшемі
 
 # Терезе құру
-screen = pygame.display.set_mode((WIDTH, HEIGHT))
+screen = pygame.display.set_mode((600, 400))
 pygame.display.set_caption("Snake Game with Levels")
 clock = pygame.time.Clock()
 
@@ -45,8 +43,8 @@ last_food_spawn_time = pygame.time.get_ticks()
 def generate_food():
     while True:
         food = {
-            "pos": [random.randrange(1, WIDTH // CELL_SIZE) * CELL_SIZE,
-                     random.randrange(1, HEIGHT // CELL_SIZE) * CELL_SIZE],
+            "pos": [random.randrange(1, 600 // CELL_SIZE) * CELL_SIZE,
+                     random.randrange(1, 400 // CELL_SIZE) * CELL_SIZE],
             "weight": random.randint(1, 3),  # Азықтың салмағы (1, 2 немесе 3 ұпай)
             "spawn_time": pygame.time.get_ticks()
         }
@@ -107,7 +105,7 @@ while isRunning:
         snake_body.pop()
 
     # Қабырғалармен соқтығысуды тексеру
-    if snake_pos[0] < 0 or snake_pos[0] >= WIDTH or snake_pos[1] < 0 or snake_pos[1] >= HEIGHT:
+    if snake_pos[0] < 0 or snake_pos[0] >= 600 or snake_pos[1] < 0 or snake_pos[1] >= 400:
         isRunning = False
 
     # Өзімен соқтығысуды тексеру
@@ -141,7 +139,7 @@ while isRunning:
 # Ойын аяқталған экран
 screen.fill(BLACK)
 game_over_text = font.render("GAME OVER", True, WHITE)
-game_over_rectangle = game_over_text.get_rect(center=(WIDTH / 2, HEIGHT / 2))
+game_over_rectangle = game_over_text.get_rect(center=(600 / 2, 400 / 2))
 screen.blit(game_over_text, game_over_rectangle)
 pygame.display.update()
 pygame.time.wait(2000)

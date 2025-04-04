@@ -81,62 +81,7 @@ def drawRectangle(screen, start, end, width, color):
 
      
  
- 
-def drawSquare(screen, start, end, color): 
-    x1 = start[0] 
-    x2 = end[0] 
-    y1 = start[1] 
-    y2 = end[1] 
-    mn = min(abs(x2 - x1), abs(y2 - y1)) 
- 
- 
-    if x2 > x1 and y2 > y1: 
-        pygame.draw.rect(screen, pygame.Color(color), (x1, y1, mn, mn)) 
-    if y2 > y1 and x1 > x2: 
-        pygame.draw.rect(screen, pygame.Color(color), (x2, y1, mn, mn)) 
-    if x1 > x2 and y1 > y2: 
-        pygame.draw.rect(screen, pygame.Color(color), (x2, y2, mn, mn)) 
-    if x2 > x1 and y1 > y2: 
-        pygame.draw.rect(screen, pygame.Color(color), (x1, y2, mn, mn)) 
- 
-def drawRightTriangle(screen, start, end, color): 
-    x1 = start[0] 
-    x2 = end[0] 
-    y1 = start[1] 
-    y2 = end[1] 
-     
-    if x2 > x1 and y2 > y1: 
-        pygame.draw.polygon(screen, pygame.Color(color), ((x1, y1), (x2, y2), (x1, y2))) 
-    if y2 > y1 and x1 > x2: 
-        pygame.draw.polygon(screen, pygame.Color(color), ((x1, y1), (x2, y2), (x1, y2))) 
-    if x1 > x2 and y1 > y2: 
-        pygame.draw.polygon(screen, pygame.Color(color), ((x1, y1), (x2, y2), (x2, y1))) 
-    if x2 > x1 and y1 > y2: 
-        pygame.draw.polygon(screen, pygame.Color(color), ((x1, y1), (x2, y2), (x2, y1))) 
- 
- 
-def drawEquilateralTriangle(screen, start, end, width, color): 
-    x1 = start[0] 
-    x2 = end[0] 
-    y1 = start[1] 
-    y2 = end[1] 
- 
-    width_b = abs(x2 - x1) 
-    height = (3**0.5) * width_b / 2 
- 
-    if y2 > y1: 
-        pygame.draw.polygon(screen, pygame.Color(color), ((x1, y2), (x2, y2), ((x1 + x2) / 2, y2 - height)), width) 
-    else: 
-        pygame.draw.polygon(screen, pygame.Color(color), ((x1, y1), (x2, y1), ((x1 + x2) / 2, y1 - height))) 
-     
- 
-def drawRhombus(screen, start, end, width, color): 
-    x1 = start[0] 
-    x2 = end[0] 
-    y1 = start[1] 
-    y2 = end[1] 
-    pygame.draw.lines(screen, pygame.Color(color), True, (((x1 + x2) / 2, y1), (x1, (y1 + y2) / 2), ((x1 + x2) / 2, y2), (x2, (y1 + y2) / 2)), width) 
- 
+
 while True: 
     for event in pygame.event.get():
         if event.type == pygame.QUIT: 

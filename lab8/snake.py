@@ -6,11 +6,10 @@ pygame.init()
 pygame.mixer.init()
 
 # Ойын тұрақтылары
-WIDTH, HEIGHT = 600, 400
 CELL_SIZE = 10  # Бір ұяшықтың өлшемі
 
 # Терезе жасау
-screen = pygame.display.set_mode((WIDTH, HEIGHT))
+screen = pygame.display.set_mode((600, 400))
 pygame.display.set_caption("Snake Game with Levels")
 clock = pygame.time.Clock()
 
@@ -24,8 +23,8 @@ RED = (255, 0, 0)
 BLACK = (0, 0, 0)
 
 # Жыланның параметрлері
-snake_pos = [100, 50]
-snake_body = [[100, 50], [90, 50], [80, 50]]
+snake_pos = [50, 100]
+snake_body = [[50, 100], [50, 90], [50, 80]]
 snake_direction = "RIGHT"
 change_to = snake_direction
 speed = 10  # Бастапқы жылдамдық
@@ -34,8 +33,8 @@ speed = 10  # Бастапқы жылдамдық
 
 def generate_food():
     while True:
-        food = [random.randrange(1, WIDTH // CELL_SIZE) * CELL_SIZE, 
-                random.randrange(1, HEIGHT // CELL_SIZE) * CELL_SIZE]
+        food = [random.randrange(1, 600 // CELL_SIZE) * CELL_SIZE, 
+                random.randrange(1, 400 // CELL_SIZE) * CELL_SIZE]
         if food not in snake_body:  # Тамақ жыланмен қабаттасып қалмауын тексереміз
             return food
 
@@ -82,7 +81,7 @@ while isRunning:
         snake_body.pop()
 
     # Қабырғамен соқтығысуын тексеру
-    if snake_pos[0] < 0 or snake_pos[0] >= WIDTH or snake_pos[1] < 0 or snake_pos[1] >= HEIGHT:
+    if snake_pos[0] < 0 or snake_pos[0] >= 600 or snake_pos[1] < 0 or snake_pos[1] >= 400:
         isRunning = False
 
     # Өзімен соқтығысуын тексеру
@@ -112,7 +111,7 @@ while isRunning:
 # Ойын аяқталған экран
 screen.fill(BLACK)
 game_over_text = font.render("ОЙЫН АЯҚТАЛДЫ", True, WHITE)
-game_over_rectangle = game_over_text.get_rect(center=(WIDTH / 2, HEIGHT / 2))
+game_over_rectangle = game_over_text.get_rect(center=(600 / 2, 400 / 2))
 screen.blit(game_over_text, game_over_rectangle)
 pygame.display.update()
 pygame.time.wait(2000)
