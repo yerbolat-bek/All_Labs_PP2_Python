@@ -55,7 +55,6 @@ class Enemy(pygame.sprite.Sprite):
             self.rect.center = (random.randint(40, SCREEN_WIDTH - 40), 0)
 
 # Монеталардың класы
-c1, c2, c3, c4, c5 = False, False, False, False, False
 class Coin(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
