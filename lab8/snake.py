@@ -5,38 +5,38 @@ import sys
 pygame.init()
 pygame.mixer.init()
 
-# Константы игры
+# Ойын тұрақтылары
 WIDTH, HEIGHT = 600, 400
-CELL_SIZE = 10  # Размер одной клетки
+CELL_SIZE = 10  # Бір ұяшықтың өлшемі
 
-# Создание окна
+# Терезе жасау
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Snake Game with Levels")
 clock = pygame.time.Clock()
 
-# Шрифты
+# Қаріптер
 font = pygame.font.Font(None, 30)
 
-# Цвета
+# Түстер
 WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 BLACK = (0, 0, 0)
 
-# Настройки змейки
+# Жыланның параметрлері
 snake_pos = [100, 50]
 snake_body = [[100, 50], [90, 50], [80, 50]]
 snake_direction = "RIGHT"
 change_to = snake_direction
-speed = 10  # Начальная скорость
+speed = 10  # Бастапқы жылдамдық
 
-# Начальная генерация еды
+# Бастапқы тамақ генерациясы
 
 def generate_food():
     while True:
         food = [random.randrange(1, WIDTH // CELL_SIZE) * CELL_SIZE, 
                 random.randrange(1, HEIGHT // CELL_SIZE) * CELL_SIZE]
-        if food not in snake_body:  # Проверяем, чтобы еда не появилась на змее
+        if food not in snake_body:  # Тамақ жыланмен қабаттасып қалмауын тексереміз
             return food
 
 food_pos = generate_food()
@@ -46,7 +46,7 @@ level = 1
 isRunning = True
 
 while isRunning:
-    # Обработка событий
+    # Оқиғаларды өңдеу
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             isRunning = False
@@ -60,7 +60,7 @@ while isRunning:
             if event.key == pygame.K_RIGHT and snake_direction != "LEFT":
                 change_to = "RIGHT"
 
-    # Движение змеи
+    # Жыланның қозғалысы
     snake_direction = change_to
     if snake_direction == "UP":
         snake_pos[1] -= CELL_SIZE
@@ -71,47 +71,47 @@ while isRunning:
     elif snake_direction == "RIGHT":
         snake_pos[0] += CELL_SIZE
 
-    # Вставляем новую позицию головы змеи
+    # Жыланның басының жаңа орнын тізімге қосу
     snake_body.insert(0, list(snake_pos))
 
-    # Проверка, съела ли змея еду
+    # Жылан тамақты жеді ме?
     if snake_pos == food_pos:
         game_score += 1
         food_pos = generate_food()
     else:
         snake_body.pop()
 
-    # Проверка столкновения со стенами
+    # Қабырғамен соқтығысуын тексеру
     if snake_pos[0] < 0 or snake_pos[0] >= WIDTH or snake_pos[1] < 0 or snake_pos[1] >= HEIGHT:
         isRunning = False
 
-    # Проверка столкновения с собой
+    # Өзімен соқтығысуын тексеру
     for block in snake_body[1:]:
         if snake_pos == block:
             isRunning = False
 
-    # Проверка уровня (каждые 3 очка)
+    # Деңгейді тексеру (әр 3 ұпай сайын)
     new_level = game_score // 3 + 1
     if new_level > level:
         level = new_level
-        speed += 2  # Увеличиваем скорость при повышении уровня
+        speed += 2  # Деңгей көтерілген сайын жылдамдық артады
 
-    # Отрисовка экрана
+    # Экранды сызу
     screen.fill(BLACK)
     for p in snake_body:
         pygame.draw.rect(screen, GREEN, pygame.Rect(p[0], p[1], CELL_SIZE, CELL_SIZE))
     pygame.draw.rect(screen, RED, pygame.Rect(food_pos[0], food_pos[1], CELL_SIZE, CELL_SIZE))
 
-    # Отображение счёта и уровня
-    score_text = font.render(f"Score: {game_score}  Level: {level}", True, WHITE)
+    # Ұпай мен деңгейді көрсету
+    score_text = font.render(f"Ұпай: {game_score}  Деңгей: {level}", True, WHITE)
     screen.blit(score_text, (20, 20))
 
     pygame.display.update()
-    clock.tick(speed)  # Регулировка скорости игры
+    clock.tick(speed)  # Ойын жылдамдығын реттеу
 
-# Экран окончания игры
+# Ойын аяқталған экран
 screen.fill(BLACK)
-game_over_text = font.render("GAME OVER", True, WHITE)
+game_over_text = font.render("ОЙЫН АЯҚТАЛДЫ", True, WHITE)
 game_over_rectangle = game_over_text.get_rect(center=(WIDTH / 2, HEIGHT / 2))
 screen.blit(game_over_text, game_over_rectangle)
 pygame.display.update()

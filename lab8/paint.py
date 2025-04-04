@@ -166,12 +166,6 @@ while True:
                 color = 'blue'
             if event.key == pygame.K_5: 
                 color = 'yellow'
-            if event.key == pygame.K_t: 
-                mode = 'right_tri'
-            if event.key == pygame.K_u: 
-                mode = 'eq_tri'
-            if event.key == pygame.K_h: 
-                mode = 'rhombus'
    
  
       
@@ -189,19 +183,10 @@ while True:
                 drawRectangle(screen, prevPos, event.pos, radius, color) 
             elif mode == 'circle': 
                 drawCircle(screen, prevPos, event.pos, radius, color) 
-            elif mode == 'square': 
-                drawSquare(screen, prevPos, event.pos, color) 
-            elif mode == 'right_tri': 
-                drawRightTriangle(screen, prevPos, event.pos, color)  
-            elif mode == 'eq_tri': 
-                drawEquilateralTriangle(screen, prevPos, event.pos, radius, color)  
-            elif mode == 'rhombus': 
-                drawRhombus(screen, prevPos, event.pos, radius, color) 
             draw = False 
  
        
         if event.type == pygame.MOUSEMOTION:  
-        # When the mouse is moved
             if draw and mode == 'pen': 
                 drawLine(screen, lastPos, event.pos, radius, color)
             elif draw and mode == 'erase': 
