@@ -7,7 +7,7 @@ pygame.display.set_caption('Red Ball')
 x,y = 400, 300
 
 speed = 20
-R = 25
+R = 20
 
 
 t = True
